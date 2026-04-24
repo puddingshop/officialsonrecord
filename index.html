@@ -392,6 +392,23 @@
     padding: 0.5rem;
   }
 
+  .reading-link {
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    right: clamp(1.25rem, 2.5vw, 2rem);
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    z-index: 10;
+    transition: color 200ms;
+  }
+
+  .reading-link:hover { color: var(--ink); }
+
   .dot-wrap {
     position: relative;
     display: flex;
@@ -457,6 +474,7 @@
   /* Hide rail on very narrow screens */
   @media (max-width: 640px) {
     .side-rail { display: none; }
+    .reading-link { display: none; }
   }
 
   @media (max-width: 640px) {
@@ -467,6 +485,8 @@
 </style>
 </head>
 <body>
+
+<a class="reading-link" href="/reading/">Further reading ↗</a>
 
 <main id="stage"></main>
 
