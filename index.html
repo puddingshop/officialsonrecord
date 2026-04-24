@@ -331,6 +331,13 @@
 
   .closing-link:hover { opacity: 0.6; }
 
+  .closing-links {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
   nav.controls {
     display: flex;
     justify-content: space-between;
@@ -576,7 +583,7 @@ const screens = [
   { type: 'quote', eyebrow: '2022 · Former Deputy Asst Sec of Defense', text: "Credible individuals were providing Congress information alleging that the US government has recovered extraterrestrial technology. Dr Davis provided specific information lending credence to sensational reports that an official US government program is actively seeking to exploit recovered technology that was fashioned by some other species or perhaps advanced AI machines.", speaker: 'Christopher Mellon', credential: 'Former Deputy Assistant Secretary of Defense for Intelligence', date: 'December 2022', source: 'https://www.christophermellon.net/post/unprecedented-uap-legislation' },
   { type: 'quote', eyebrow: '2024 · Vice Chair Senate Intelligence Committee', text: "We have people at very high clearances, both today and in the past, who did really important work for our government, who have come forward with claims about the US having recovered exotic materials and reverse engineered those materials to make advances in our own defenses and technologies. One of two things is happening here. Either they are telling the truth, and that is something that would obviously be the biggest story in human history, or we have people in really important positions in government who are crazy, who are making up stories, and who are still in positions of importance.", speaker: 'Marco Rubio', credential: 'US Senator, Vice Chair Senate Intelligence Committee', date: 'September 2024', source: 'https://x.com/disclosureorg/status/1835345942934852009' },
 
-  { type: 'closing', text: 'That was 80 public statements. From presidents, senators, intelligence directors, generals, pilots, and government reports. Everyone who dismissed this used to have good reasons. They were: nobody credible had said anything, no sensor data existed, no government had confirmed it. Those reasons are gone. You are welcome to find new ones.', sub: 'Curated from uap.guide, an archive of official statements on unidentified anomalous phenomena.', linkText: 'Continue at uap.guide', linkUrl: 'https://www.uap.guide' }
+  { type: 'closing', text: 'That was 80 public statements. From presidents, senators, intelligence directors, generals, pilots, and government reports. Everyone who dismissed this used to have good reasons. They were: nobody credible had said anything, no sensor data existed, no government had confirmed it. Those reasons are gone. You are welcome to find new ones.', sub: 'Curated from uap.guide, an archive of official statements on unidentified anomalous phenomena.', linkText: 'Continue at uap.guide', linkUrl: 'https://www.uap.guide', readingText: 'Further reading', readingUrl: '/reading/' }
 ];
 
 const stage = document.getElementById('stage');
@@ -634,7 +641,10 @@ function render() {
         <div class="screen-inner">
           <p class="closing-text">${s.text}</p>
           <p class="closing-sub">${s.sub}</p>
-          <a class="closing-link" href="${s.linkUrl}" target="_blank" rel="noopener">${s.linkText}</a>
+          <div class="closing-links">
+            <a class="closing-link" href="${s.linkUrl}" target="_blank" rel="noopener">${s.linkText}</a>
+            <a class="closing-link" href="${s.readingUrl}">${s.readingText}</a>
+          </div>
         </div>
       `;
     }
