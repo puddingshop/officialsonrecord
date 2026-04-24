@@ -409,6 +409,15 @@
 
   .reading-link:hover { color: var(--ink); }
 
+  .arrow {
+    width: 0.95em;
+    height: 0.95em;
+    vertical-align: -0.1em;
+    display: inline-block;
+    margin-left: 0.35em;
+  }
+  .arrow.arrow-left { margin-left: 0; margin-right: 0.35em; }
+
   .dot-wrap {
     position: relative;
     display: flex;
@@ -486,14 +495,14 @@
 </head>
 <body>
 
-<a class="reading-link" href="/reading/">Further reading ↗</a>
+<a class="reading-link" href="/reading/">Further reading <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></a>
 
 <main id="stage"></main>
 
 <nav class="controls">
-  <button class="nav-btn" id="prev-btn">← Prev</button>
+  <button class="nav-btn" id="prev-btn"><svg class="arrow arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Prev</button>
   <span class="progress" id="progress"></span>
-  <button class="nav-btn" id="next-btn">Next →</button>
+  <button class="nav-btn" id="next-btn">Next <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
 </nav>
 
 <aside class="side-rail" id="side-rail" aria-label="Chapter navigation">
@@ -663,7 +672,7 @@ function render() {
           <p class="closing-sub">${s.sub}</p>
           <div class="closing-links">
             <a class="closing-link" href="${s.linkUrl}" target="_blank" rel="noopener">${s.linkText}</a>
-            <a class="closing-link" href="${s.readingUrl}">${s.readingText}</a>
+            <a class="closing-link" href="${s.readingUrl}">${s.readingText}<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></a>
           </div>
         </div>
       `;
