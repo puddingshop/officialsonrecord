@@ -393,9 +393,8 @@
   }
 
   .reading-link {
-    position: fixed;
-    top: clamp(1.25rem, 2.5vh, 2rem);
-    right: clamp(1.25rem, 2.5vw, 2rem);
+    display: inline-block;
+    margin: 1.5rem auto 0;
     font-family: 'Public Sans', -apple-system, sans-serif;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -403,11 +402,86 @@
     font-weight: 500;
     color: var(--muted);
     text-decoration: none;
-    z-index: 10;
     transition: color 200ms;
   }
 
   .reading-link:hover { color: var(--ink); }
+
+  .footer-link-wrap {
+    text-align: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Survey widget — skinny banner at top */
+  .survey {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg);
+    border-bottom: 1px solid var(--rule);
+    margin: -4vh -6vw 4vh;
+    padding: 0.7rem clamp(2.5rem, 5vw, 3.5rem) 0.7rem clamp(1rem, 4vw, 2rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .survey[hidden] { display: none; }
+
+  .survey-step {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .survey-step[hidden] { display: none; }
+
+  .survey-prompt {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .survey-btn {
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: all 180ms;
+  }
+
+  .survey-btn:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+  }
+
+  .survey-dismiss {
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .survey-dismiss:hover { color: var(--ink); }
 
   .arrow {
     width: 0.95em;
@@ -483,19 +557,52 @@
   /* Hide rail on very narrow screens */
   @media (max-width: 640px) {
     .side-rail { display: none; }
-    .reading-link { display: none; }
   }
 
   @media (max-width: 640px) {
     body { padding: 3vh 5vw; }
     .quote-text { margin-bottom: 2rem; }
     .date { margin-bottom: 2rem; }
+
+    /* Keep Next button always reachable without scrolling */
+    nav.controls {
+      position: sticky;
+      bottom: 0;
+      background: var(--bg);
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .survey {
+      margin: -3vh -5vw 3vh;
+      flex-direction: column;
+      gap: 0.55rem;
+      padding-right: 2.5rem;
+      font-size: 0.7rem;
+      text-align: center;
+    }
   }
 </style>
 </head>
 <body>
 
-<a class="reading-link" href="/reading/">Further reading <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></a>
+<aside class="survey" id="survey" aria-label="Reader survey">
+  <div class="survey-step survey-q1">
+    <span class="survey-prompt">Did you take UAP seriously before reading this?</span>
+    <button class="survey-btn" data-q="1" data-v="yes" aria-label="Yes">👍</button>
+    <button class="survey-btn" data-q="1" data-v="no" aria-label="No">👎</button>
+  </div>
+  <div class="survey-step survey-q2" hidden>
+    <span class="survey-prompt">Has this changed your thinking?</span>
+    <button class="survey-btn" data-q="2" data-v="yes" aria-label="Yes">👍</button>
+    <button class="survey-btn" data-q="2" data-v="no" aria-label="No">👎</button>
+  </div>
+  <div class="survey-step survey-thanks" hidden>
+    <span class="survey-prompt">Thanks for the feedback.</span>
+  </div>
+  <button class="survey-dismiss" id="survey-dismiss" aria-label="Dismiss survey">×</button>
+</aside>
 
 <main id="stage"></main>
 
@@ -504,6 +611,10 @@
   <span class="progress" id="progress"></span>
   <button class="nav-btn" id="next-btn">Next <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
 </nav>
+
+<div class="footer-link-wrap">
+  <a class="reading-link" href="/reading/">Further reading <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></a>
+</div>
 
 <aside class="side-rail" id="side-rail" aria-label="Chapter navigation">
   <!-- dots injected by JS -->
@@ -777,6 +888,76 @@ document.addEventListener('keydown', (e) => {
 });
 
 render();
+
+// Survey widget
+(function() {
+  const survey = document.getElementById('survey');
+  if (!survey) return;
+
+  const STORAGE_KEY = 'oor_survey_v1';
+  // TODO: replace with your Formspree endpoint after signing up at formspree.io with hello@jordanhillier.com
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_REAL_ID';
+
+  if (localStorage.getItem(STORAGE_KEY)) {
+    survey.hidden = true;
+    return;
+  }
+
+  const state = { q1: null, q2: null };
+  const stepQ1 = survey.querySelector('.survey-q1');
+  const stepQ2 = survey.querySelector('.survey-q2');
+  const stepThanks = survey.querySelector('.survey-thanks');
+
+  survey.addEventListener('click', async (e) => {
+    if (e.target.closest('.survey-dismiss')) {
+      survey.hidden = true;
+      localStorage.setItem(STORAGE_KEY, 'dismissed');
+      return;
+    }
+
+    const btn = e.target.closest('.survey-btn');
+    if (!btn) return;
+
+    const q = btn.dataset.q;
+    state['q' + q] = btn.dataset.v;
+
+    if (q === '1') {
+      stepQ1.hidden = true;
+      stepQ2.hidden = false;
+      return;
+    }
+
+    // q === '2' — submit and thank
+    stepQ2.hidden = true;
+    stepThanks.hidden = false;
+
+    let outcome = 'Unknown';
+    if (state.q1 === 'yes' && state.q2 === 'yes') outcome = 'Reinforced existing belief';
+    else if (state.q1 === 'yes' && state.q2 === 'no') outcome = 'Already convinced';
+    else if (state.q1 === 'no' && state.q2 === 'yes') outcome = 'Convinced — new belief';
+    else if (state.q1 === 'no' && state.q2 === 'no') outcome = 'Unconvinced';
+
+    try {
+      await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'On the Record — ' + outcome,
+          believed_before: state.q1,
+          changed_thinking: state.q2,
+          outcome: outcome,
+          page: window.location.href,
+          timestamp: new Date().toISOString()
+        })
+      });
+    } catch (err) {
+      console.warn('Survey submit failed:', err);
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, outcome }));
+    setTimeout(() => { survey.hidden = true; }, 3500);
+  });
+})();
 </script>
 
 </body>
