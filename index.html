@@ -592,12 +592,12 @@
 
 <aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
-    <span class="survey-prompt">Did you take UAP seriously before reading this?</span>
+    <span class="survey-prompt">Do you think UAP are a serious topic?</span>
     <button class="survey-btn" data-q="1" data-v="yes" aria-label="Yes">👍</button>
     <button class="survey-btn" data-q="1" data-v="no" aria-label="No">👎</button>
   </div>
   <div class="survey-step survey-q2" hidden>
-    <span class="survey-prompt">Has this changed your thinking?</span>
+    <span class="survey-prompt">Has this changed your mind?</span>
     <button class="survey-btn" data-q="2" data-v="yes" aria-label="Yes">👍</button>
     <button class="survey-btn" data-q="2" data-v="no" aria-label="No">👎</button>
   </div>
@@ -940,9 +940,9 @@ render();
     stepThanks.hidden = false;
 
     let outcome = 'Unknown';
-    if (state.q1 === 'yes' && state.q2 === 'yes') outcome = 'Reinforced existing belief';
+    if (state.q1 === 'yes' && state.q2 === 'yes') outcome = 'Convinced by site';
     else if (state.q1 === 'yes' && state.q2 === 'no') outcome = 'Already convinced';
-    else if (state.q1 === 'no' && state.q2 === 'yes') outcome = 'Convinced — new belief';
+    else if (state.q1 === 'no' && state.q2 === 'yes') outcome = 'Mind changed — now skeptical';
     else if (state.q1 === 'no' && state.q2 === 'no') outcome = 'Unconvinced';
 
     try {
