@@ -411,14 +411,15 @@
 
   .reading-link:hover { color: var(--ink); }
 
-  /* Survey widget — skinny dark bar at top */
+  /* Survey widget — slim banner pinned to viewport top */
   .survey {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 20;
-    background: var(--ink);
-    color: #d8d4ca;
-    margin: -4vh -6vw 4vh;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: var(--rule);
+    color: var(--ink);
     padding: 0.4rem clamp(2.5rem, 5vw, 3rem) 0.4rem clamp(1rem, 4vw, 2rem);
     min-height: 36px;
     display: flex;
@@ -447,14 +448,14 @@
   .survey-step[hidden] { display: none; }
 
   .survey-prompt {
-    color: var(--bg);
+    color: var(--ink);
     font-weight: 500;
   }
 
   .survey-btn {
     background: none;
-    border: 1px solid rgba(245, 242, 234, 0.25);
-    color: var(--bg);
+    border: 1px solid rgba(26, 26, 26, 0.25);
+    color: var(--ink);
     padding: 0.15rem 0.5rem;
     border-radius: 3px;
     cursor: pointer;
@@ -464,8 +465,9 @@
   }
 
   .survey-btn:hover {
-    border-color: var(--bg);
-    background: var(--bg);
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
   }
 
   .survey-dismiss {
@@ -476,13 +478,13 @@
     background: none;
     border: none;
     font-size: 1.1rem;
-    color: rgba(245, 242, 234, 0.5);
+    color: rgba(26, 26, 26, 0.5);
     cursor: pointer;
     line-height: 1;
     padding: 0.15rem 0.5rem;
   }
 
-  .survey-dismiss:hover { color: var(--bg); }
+  .survey-dismiss:hover { color: var(--ink); }
 
   .arrow {
     width: 0.95em;
@@ -577,7 +579,6 @@
     }
 
     .survey {
-      margin: -3vh -5vw 3vh;
       flex-direction: column;
       gap: 0.55rem;
       padding-right: 2.5rem;
@@ -805,6 +806,7 @@ function updateControls() {
     const currentQuoteIndex = screens.slice(0, index + 1).filter(x => x.type === 'quote').length;
     progress.textContent = `${currentQuoteIndex} / ${quoteScreens.length}`;
     progress.classList.add('visible');
+    window.dispatchEvent(new CustomEvent('quoteViewed', { detail: currentQuoteIndex }));
   } else {
     progress.classList.remove('visible');
     progress.textContent = '';
@@ -894,7 +896,7 @@ render();
   const survey = document.getElementById('survey');
   if (!survey) return;
 
-  const STORAGE_KEY = 'oor_survey_v2';
+  const STORAGE_KEY = 'oor_survey_v3';
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdyqagw';
 
   if (localStorage.getItem(STORAGE_KEY)) {
@@ -902,11 +904,16 @@ render();
     return;
   }
 
-  // Delay before showing the banner so it doesn't intrude immediately
-  setTimeout(() => {
+  // Show the banner once the reader has advanced through 5 statements
+  const SHOW_AFTER_QUOTES = 5;
+  let shown = false;
+  window.addEventListener('quoteViewed', (e) => {
+    if (shown) return;
+    if (e.detail < SHOW_AFTER_QUOTES) return;
+    shown = true;
     survey.hidden = false;
     requestAnimationFrame(() => survey.classList.add('visible'));
-  }, 18000);
+  });
 
   const state = { q1: null, q2: null };
   const stepQ1 = survey.querySelector('.survey-q1');
