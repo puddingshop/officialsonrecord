@@ -393,8 +393,9 @@
   }
 
   .reading-link {
-    display: inline-block;
-    margin: 1.5rem auto 0;
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    right: clamp(1.25rem, 2.5vw, 2rem);
     font-family: 'Public Sans', -apple-system, sans-serif;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -404,16 +405,11 @@
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
+    z-index: 10;
     transition: color 200ms;
   }
 
   .reading-link:hover { color: var(--ink); }
-
-  .footer-link-wrap {
-    text-align: center;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
 
   /* Survey widget — skinny dark bar at top */
   .survey {
@@ -562,6 +558,7 @@
   /* Hide rail on very narrow screens */
   @media (max-width: 640px) {
     .side-rail { display: none; }
+    .reading-link { display: none; }
   }
 
   @media (max-width: 640px) {
@@ -592,6 +589,8 @@
 </head>
 <body>
 
+<a class="reading-link" href="/reading/">Further reading</a>
+
 <aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
     <span class="survey-prompt">Do you think UAP are a serious topic?</span>
@@ -616,10 +615,6 @@
   <span class="progress" id="progress"></span>
   <button class="nav-btn" id="next-btn">Next <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
 </nav>
-
-<div class="footer-link-wrap">
-  <a class="reading-link" href="/reading/">Further reading</a>
-</div>
 
 <aside class="side-rail" id="side-rail" aria-label="Chapter navigation">
   <!-- dots injected by JS -->
