@@ -410,36 +410,38 @@
   .footer-link-wrap {
     text-align: center;
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
+    margin-top: 0.5rem;
   }
 
-  /* Survey widget — skinny banner at top */
+  /* Survey widget — skinny dark bar at top */
   .survey {
     position: sticky;
     top: 0;
     z-index: 20;
-    background: var(--bg);
-    border-bottom: 1px solid var(--rule);
+    background: var(--ink);
+    color: #d8d4ca;
     margin: -4vh -6vw 4vh;
-    padding: 0.7rem clamp(2.5rem, 5vw, 3.5rem) 0.7rem clamp(1rem, 4vw, 2rem);
+    padding: 0.4rem clamp(2.5rem, 5vw, 3rem) 0.4rem clamp(1rem, 4vw, 2rem);
+    min-height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.2rem;
+    gap: 1rem;
     flex-wrap: wrap;
     font-family: 'Public Sans', -apple-system, sans-serif;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     letter-spacing: 0.02em;
-    color: var(--muted);
+    opacity: 0;
+    transition: opacity 400ms ease;
   }
 
+  .survey.visible { opacity: 1; }
   .survey[hidden] { display: none; }
 
   .survey-step {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -447,41 +449,42 @@
   .survey-step[hidden] { display: none; }
 
   .survey-prompt {
-    color: var(--ink);
+    color: var(--bg);
     font-weight: 500;
   }
 
   .survey-btn {
     background: none;
-    border: 1px solid var(--rule);
-    padding: 0.25rem 0.6rem;
+    border: 1px solid rgba(245, 242, 234, 0.25);
+    color: var(--bg);
+    padding: 0.15rem 0.5rem;
     border-radius: 3px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1;
     transition: all 180ms;
   }
 
   .survey-btn:hover {
-    border-color: var(--ink);
-    background: var(--ink);
+    border-color: var(--bg);
+    background: var(--bg);
   }
 
   .survey-dismiss {
     position: absolute;
-    right: 0.6rem;
+    right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
-    font-size: 1.3rem;
-    color: var(--muted);
+    font-size: 1.1rem;
+    color: rgba(245, 242, 234, 0.5);
     cursor: pointer;
     line-height: 1;
-    padding: 0.2rem 0.5rem;
+    padding: 0.15rem 0.5rem;
   }
 
-  .survey-dismiss:hover { color: var(--ink); }
+  .survey-dismiss:hover { color: var(--bg); }
 
   .arrow {
     width: 0.95em;
@@ -587,7 +590,7 @@
 </head>
 <body>
 
-<aside class="survey" id="survey" aria-label="Reader survey">
+<aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
     <span class="survey-prompt">Did you take UAP seriously before reading this?</span>
     <button class="survey-btn" data-q="1" data-v="yes" aria-label="Yes">👍</button>
@@ -901,6 +904,12 @@ render();
     survey.hidden = true;
     return;
   }
+
+  // Delay before showing the banner so it doesn't intrude immediately
+  setTimeout(() => {
+    survey.hidden = false;
+    requestAnimationFrame(() => survey.classList.add('visible'));
+  }, 18000);
 
   const state = { q1: null, q2: null };
   const stepQ1 = survey.querySelector('.survey-q1');
