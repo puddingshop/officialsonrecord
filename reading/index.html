@@ -33,7 +33,7 @@
     margin: 0 auto;
   }
 
-  /* Wordmark — top-left, matches home */
+  /* Wordmark — top-left, matches home; doubles as back-to-home with reveal arrow */
   .wordmark {
     position: fixed;
     top: clamp(1.25rem, 2.5vh, 2rem);
@@ -47,34 +47,30 @@
     color: var(--ink);
     text-decoration: none;
     z-index: 10;
-    transition: opacity 200ms;
   }
-  .wordmark:hover { opacity: 0.6; }
 
-  /* Top-right stacked nav — matches home */
-  .top-nav {
-    position: fixed;
-    top: clamp(1.25rem, 2.5vh, 2rem);
-    right: clamp(1.25rem, 2.5vw, 2rem);
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-    align-items: flex-end;
-    z-index: 10;
-  }
-  .top-nav a {
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    font-weight: 500;
+  /* "← Back" reveal under wordmark on hover/focus — muted, subtle */
+  .wordmark-back {
+    display: block;
+    margin-top: 0.55rem;
     color: var(--muted);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    transition: color 200ms;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 220ms ease, transform 220ms ease;
   }
-  .top-nav a:hover { color: var(--ink); }
+  .wordmark-back svg {
+    width: 0.95em;
+    height: 0.95em;
+    vertical-align: -0.1em;
+    margin-right: 0.35em;
+  }
+  .wordmark:hover .wordmark-back,
+  .wordmark:focus-visible .wordmark-back {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   /* Footer back link (kept for end-of-page nav) */
   .back-link {
@@ -167,9 +163,50 @@
     margin-bottom: 2rem;
   }
 
+  /* Filter toggle — Government / Science / Community */
+  .filter-toggle {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.25rem;
+    margin: 0 auto 4rem;
+    font-family: 'Public Sans', -apple-system, sans-serif;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    padding: 0.4rem 0;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+
+  .filter-btn:hover { color: var(--ink); }
+
+  .filter-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+
+  .filter-count {
+    font-variant-numeric: tabular-nums;
+    margin-left: 0.5em;
+    opacity: 0.55;
+    font-weight: 400;
+  }
+
   .list {
     border-top: 1px solid var(--rule);
   }
+
+  .entry[hidden] { display: none; }
 
   .entry {
     display: block;
@@ -216,8 +253,7 @@
   @media (max-width: 640px) {
     body { padding: 5rem 5vw 4rem; }
     .wordmark { font-size: 0.6rem; letter-spacing: 0.1em; }
-    .top-nav a { font-size: 0.6rem; letter-spacing: 0.12em; }
-    .top-nav { gap: 0.35rem; }
+    .wordmark-back { font-size: 0.55rem; }
 
     .section-frame { margin-bottom: 4rem; padding: 2.25rem 1.25rem; }
     h1 { margin-bottom: 0; }
@@ -229,111 +265,134 @@
 </head>
 <body>
 
-<a class="wordmark" href="/" aria-label="Officials on Record — home">OFFICIALS<br>ON RECORD</a>
-
-<nav class="top-nav" aria-label="Site sections">
-  <a href="/">Statements</a>
-  <a href="/all/">Index</a>
-</nav>
+<a class="wordmark" href="/" aria-label="Officials on Record — back to statements">
+  OFFICIALS<br>ON RECORD<span class="wordmark-back" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Back</span>
+</a>
 
 <div class="section-frame">
   <h1>Further reading</h1>
   <p class="intro">Primary-source documents, hosted by the issuing body where possible.</p>
 </div>
 
-<div class="list">
+<nav class="filter-toggle" aria-label="Filter by source type" id="filter-toggle">
+  <button class="filter-btn active" data-filter="all" type="button">All<span class="filter-count">18</span></button>
+  <button class="filter-btn" data-filter="government" type="button">Government<span class="filter-count">12</span></button>
+  <button class="filter-btn" data-filter="science" type="button">Science<span class="filter-count">5</span></button>
+  <button class="filter-btn" data-filter="community" type="button">Community<span class="filter-count">1</span></button>
+</nav>
 
-  <a class="entry" href="https://www.govinfo.gov/content/pkg/PLAW-117publ263/pdf/PLAW-117publ263.pdf" target="_blank" rel="noopener">
+<div class="list" id="reading-list">
+
+  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/PLAW-117publ263/pdf/PLAW-117publ263.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">First US federal law to define UAP — NDAA 2023</h2>
     <p class="entry-meta">117th US Congress<span class="sep">·</span>Dec 2022</p>
   </a>
 
-  <a class="entry" href="https://arxiv.org/pdf/2502.06794" target="_blank" rel="noopener">
+  <a class="entry" data-category="science" href="https://arxiv.org/pdf/2502.06794" target="_blank" rel="noopener">
     <h2 class="entry-title">Stanford-led review — 30 scientists on the new science of UAP</h2>
     <p class="entry-meta">Stanford<span class="sep">·</span>Knuth, Nolan, Powell et al.<span class="sep">·</span>arXiv<span class="sep">·</span>Feb 2025</p>
   </a>
 
-  <a class="entry" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg57440/pdf/CHRG-118hhrg57440.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg57440/pdf/CHRG-118hhrg57440.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">2024 Joint Subcommittee Hearing — sworn testimony</h2>
     <p class="entry-meta">US House of Representatives<span class="sep">·</span>Nov 2024</p>
   </a>
 
-  <a class="entry" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">2023 House Oversight UAP hearing — sworn testimony from Grusch, Graves &amp; Fravor</h2>
     <p class="entry-meta">US House of Representatives<span class="sep">·</span>Jul 2023</p>
   </a>
 
-  <a class="entry" href="https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-2024-0263-AARO-HISTORICAL-RECORD-REPORT-VOLUME-1-2024.PDF" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-2024-0263-AARO-HISTORICAL-RECORD-REPORT-VOLUME-1-2024.PDF" target="_blank" rel="noopener">
     <h2 class="entry-title">The Pentagon's historical review of UAP investigations (Volume I)</h2>
     <p class="entry-meta">All-domain Anomaly Resolution Office (AARO)<span class="sep">·</span>Mar 2024</p>
   </a>
 
-  <a class="entry" href="https://www.defense.gov/News/Releases/Release/Article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.defense.gov/News/Releases/Release/Article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/" target="_blank" rel="noopener">
     <h2 class="entry-title">The Pentagon confirms the Navy UAP videos are authentic</h2>
     <p class="entry-meta">Department of Defense<span class="sep">·</span>Apr 2020</p>
   </a>
 
-  <a class="entry" href="https://www.dni.gov/files/ODNI/documents/assessments/FY2023-Consolidated-Annual-Report-UAP-Oct2023.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/FY2023-Consolidated-Annual-Report-UAP-Oct2023.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">2023 US Intelligence UAP Report to Congress</h2>
     <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Oct 2023</p>
   </a>
 
-  <a class="entry" href="https://www.dni.gov/files/ODNI/documents/assessments/Unclassified-2022-Annual-Report-UAP.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/Unclassified-2022-Annual-Report-UAP.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">2022 US Intelligence UAP Report to Congress</h2>
     <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jan 2023</p>
   </a>
 
-  <a class="entry" href="https://www.dni.gov/files/ODNI/documents/assessments/Prelimary-Assessment-UAP-20210625.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/Prelimary-Assessment-UAP-20210625.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">US Intelligence's first public UAP assessment (2021)</h2>
     <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jun 2021</p>
   </a>
 
-  <a class="entry" href="https://documents2.theblackvault.com/documents/odni/DEOM-2021-00006.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://documents2.theblackvault.com/documents/odni/DEOM-2021-00006.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">Classified UAP assessment — released via FOIA (2021)</h2>
     <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jun 2021</p>
   </a>
 
-  <a class="entry" href="https://science.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="science" href="https://science.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">NASA convenes 16 scientists for independent UAP study</h2>
     <p class="entry-meta">NASA Independent Study Team<span class="sep">·</span>Sep 2023</p>
   </a>
 
-  <a class="entry" href="https://arxiv.org/pdf/2209.02479" target="_blank" rel="noopener">
+  <a class="entry" data-category="science" href="https://arxiv.org/pdf/2209.02479" target="_blank" rel="noopener">
     <h2 class="entry-title">Harvard's Galileo Project — search for extraterrestrial technology</h2>
     <p class="entry-meta">Harvard<span class="sep">·</span>Avi Loeb &amp; Frank Laukien<span class="sep">·</span>2022</p>
   </a>
 
-  <a class="entry" href="https://www.mdpi.com/1099-4300/21/10/939" target="_blank" rel="noopener">
+  <a class="entry" data-category="science" href="https://www.mdpi.com/1099-4300/21/10/939" target="_blank" rel="noopener">
     <h2 class="entry-title">Navy UAP defy known physics — peer-reviewed analysis</h2>
     <p class="entry-meta">Knuth, Powell &amp; Reali<span class="sep">·</span>Entropy (peer-reviewed)<span class="sep">·</span>Oct 2019</p>
   </a>
 
-  <a class="entry" href="https://thesolfoundation.org/wp-content/uploads/2023/07/Sol_WhitePaper_Vol1N1.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="science" href="https://thesolfoundation.org/wp-content/uploads/2023/07/Sol_WhitePaper_Vol1N1.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">Rear Admiral, PhD &amp; former NOAA Administrator — on UAP in the ocean</h2>
     <p class="entry-meta">Tim Gallaudet<span class="sep">·</span>Sol Foundation<span class="sep">·</span>Mar 2024</p>
   </a>
 
-  <a class="entry" href="https://ia800403.us.archive.org/17/items/pdfy-NRIQie2ooVehep7K/The%20Cometa%20Report%20%5BUFO%27s%20And%20Defense%20-%20What%20Should%20We%20Prepare%20For%5D.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://ia800403.us.archive.org/17/items/pdfy-NRIQie2ooVehep7K/The%20Cometa%20Report%20%5BUFO%27s%20And%20Defense%20-%20What%20Should%20We%20Prepare%20For%5D.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">French Defence Report — UFOs and Defense, What Should We Prepare For?</h2>
     <p class="entry-meta">Comité d'Études Approfondies (COMETA)<span class="sep">·</span>1999</p>
   </a>
 
-  <a class="entry" href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/ufo/french_gov_ufo_study.pdf" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/ufo/french_gov_ufo_study.pdf" target="_blank" rel="noopener">
     <h2 class="entry-title">Declassified French UFO study — NSA-hosted</h2>
     <p class="entry-meta">National Security Agency archive<span class="sep">·</span>1999</p>
   </a>
 
-  <a class="entry" href="https://www.archives.gov/research/military/air-force/ufos" target="_blank" rel="noopener">
+  <a class="entry" data-category="government" href="https://www.archives.gov/research/military/air-force/ufos" target="_blank" rel="noopener">
     <h2 class="entry-title">US Air Force's 17-year official UFO investigation — Project Blue Book</h2>
     <p class="entry-meta">US Air Force<span class="sep">·</span>1985</p>
   </a>
 
-  <a class="entry" href="https://pdfhost.io/v/gR8lAdgVd_Uap_Timeline_Prepared_By_Another" target="_blank" rel="noopener">
+  <a class="entry" data-category="community" href="https://pdfhost.io/v/gR8lAdgVd_Uap_Timeline_Prepared_By_Another" target="_blank" rel="noopener">
     <h2 class="entry-title">UAP Timeline</h2>
     <p class="entry-meta">Independent compilation</p>
   </a>
 
 </div>
+
+<script>
+(function() {
+  const buttons = document.querySelectorAll('.filter-btn');
+  const entries = document.querySelectorAll('#reading-list .entry');
+
+  function applyFilter(filter) {
+    entries.forEach(entry => {
+      const match = filter === 'all' || entry.dataset.category === filter;
+      entry.hidden = !match;
+    });
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+  });
+})();
+</script>
 
 <footer>
   <a class="back-link" href="/" style="margin-bottom: 0;"><svg class="arrow arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Statements</a>

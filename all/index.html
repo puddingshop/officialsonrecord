@@ -82,8 +82,20 @@
   .top-nav a:hover { color: var(--ink); }
 
   main {
-    max-width: 720px;
+    max-width: 1100px;
     margin: 0 auto;
+  }
+
+  /* Section-frame box around the page heading — mirrors home Chapter screens */
+  .section-frame {
+    border: 1px solid var(--rule);
+    padding: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.5rem);
+    max-width: 1100px;
+    margin: 0 auto 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .page-eyebrow {
@@ -93,32 +105,38 @@
     font-size: 0.78rem;
     font-weight: 500;
     color: var(--muted);
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem;
     text-align: center;
   }
 
   .page-title {
     font-family: 'Newsreader', Georgia, serif;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
     font-weight: 600;
     font-variation-settings: "opsz" 48;
     letter-spacing: -0.015em;
     line-height: 1.1;
     text-align: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
     text-wrap: balance;
   }
 
   .page-sub {
     font-family: 'Newsreader', Georgia, serif;
     font-variation-settings: "opsz" 14;
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
     color: var(--muted);
     text-align: center;
     max-width: 540px;
-    margin: 0 auto 5rem;
+    margin: 1.5rem auto 0;
     line-height: 1.55;
     text-wrap: pretty;
+  }
+
+  /* Inner column for the entries list */
+  .entries-wrap {
+    max-width: 720px;
+    margin: 0 auto;
   }
 
   /* Chapter divider */
@@ -174,6 +192,14 @@
     font-weight: 500;
     color: var(--muted);
     margin-bottom: 1.4rem;
+  }
+
+  .entry-number {
+    font-variant-numeric: tabular-nums;
+    margin-right: 0.7em;
+    color: var(--ink);
+    font-weight: 600;
+    opacity: 0.85;
   }
 
   .entry-quote {
@@ -252,10 +278,14 @@
 </nav>
 
 <main>
-  <p class="page-eyebrow">Index</p>
-  <h1 class="page-title">All 80 statements.</h1>
-  <p class="page-sub">Every quote on the site, grouped by chapter. Click any to open it in the slideshow.</p>
-  <div id="entries"></div>
+  <div class="section-frame">
+    <p class="page-eyebrow">Index</p>
+    <h1 class="page-title">All 80 statements.</h1>
+    <p class="page-sub">Every quote on the site, grouped by chapter. Click any to open it in the slideshow.</p>
+  </div>
+  <div class="entries-wrap">
+    <div id="entries"></div>
+  </div>
 </main>
 
 <script src="/data.js"></script>
@@ -275,6 +305,9 @@
 
   let html = '';
   let chapterOpen = false;
+  let quoteNum = 0;
+  const totalQuotes = screens.filter(x => x.type === 'quote').length;
+  const pad = String(totalQuotes).length; // 2 for 80, 3 for 100+
 
   screens.forEach((s, i) => {
     if (s.type === 'section') {
@@ -286,9 +319,11 @@
       html += '</div>';
       chapterOpen = true;
     } else if (s.type === 'quote') {
+      quoteNum++;
+      const num = String(quoteNum).padStart(pad, '0');
       const slug = slugs[i] || '';
-      html += '<article class="entry" data-slug="' + esc(slug) + '" tabindex="0" role="link" aria-label="Read ' + esc(s.speaker) + ' quote in slideshow">';
-      if (s.eyebrow) html += '<div class="entry-eyebrow">' + esc(s.eyebrow) + '</div>';
+      html += '<article class="entry" data-slug="' + esc(slug) + '" tabindex="0" role="link" aria-label="Statement ' + quoteNum + ': read ' + esc(s.speaker) + ' quote in slideshow">';
+      html += '<div class="entry-eyebrow"><span class="entry-number">' + num + '</span>' + (s.eyebrow ? esc(s.eyebrow) : '') + '</div>';
       html += '<div class="entry-quote">&ldquo;' + esc(s.text) + '&rdquo;</div>';
       html += '<div class="entry-meta">';
       html += '<span class="entry-speaker">' + esc(s.speaker) + '</span> · ' + esc(s.credential) + ' · ' + esc(s.date);
