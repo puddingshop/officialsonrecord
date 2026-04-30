@@ -416,24 +416,6 @@
     padding: 0.5rem;
   }
 
-  .reading-link {
-    position: fixed;
-    top: clamp(1.25rem, 2.5vh, 2rem);
-    right: clamp(1.25rem, 2.5vw, 2rem);
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    z-index: 10;
-    transition: color 200ms;
-  }
-
-  .reading-link:hover { color: var(--ink); }
 
   /* Survey widget — slim banner pinned to viewport top */
   .survey {
@@ -710,7 +692,10 @@
 
 <a class="wordmark" href="/" aria-label="Officials on Record — home">OFFICIALS<br>ON RECORD</a>
 
-<a class="reading-link" href="/reading/">Further reading</a>
+<nav class="top-nav" aria-label="Site sections">
+  <a href="/all/">All statements</a>
+  <a href="/reading/">Further reading</a>
+</nav>
 
 <aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
