@@ -239,11 +239,12 @@
   }
 
   @keyframes pulse-glow {
+    /* Warm dark brown so the glow sits in the cream palette, not on top of it */
     0%, 100% {
-      box-shadow: 0 0 12px 4px rgba(26, 26, 26, 0.08);
+      box-shadow: 0 0 12px 4px rgba(80, 65, 50, 0.12);
     }
     50% {
-      box-shadow: 0 0 28px 12px rgba(26, 26, 26, 0.18);
+      box-shadow: 0 0 28px 12px rgba(80, 65, 50, 0.22);
     }
   }
 
@@ -386,7 +387,21 @@
     opacity: 0;
     transition: opacity 300ms;
   }
-  .progress.visible { opacity: 0.5; }
+  .progress.visible { opacity: 0.85; }
+
+  .progress-sep {
+    margin: 0 0.45em;
+    opacity: 0.55;
+  }
+
+  .progress-index {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 200ms;
+  }
+  .progress-index:hover { color: var(--ink); }
 
   /* Side rail — chapter map */
   .side-rail {
@@ -695,10 +710,7 @@
 
 <a class="wordmark" href="/" aria-label="Officials on Record — home">OFFICIALS<br>ON RECORD</a>
 
-<nav class="top-nav" aria-label="Site sections">
-  <a href="/all/">Index</a>
-  <a href="/reading/">Further reading</a>
-</nav>
+<a class="reading-link" href="/reading/">Further reading</a>
 
 <aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
@@ -823,12 +835,12 @@ function updateControls() {
   if (s.type === 'quote') {
     const quoteScreens = screens.filter(x => x.type === 'quote');
     const currentQuoteIndex = screens.slice(0, index + 1).filter(x => x.type === 'quote').length;
-    progress.textContent = `${currentQuoteIndex} / ${quoteScreens.length}`;
+    progress.innerHTML = `${currentQuoteIndex} / ${quoteScreens.length} <span class="progress-sep">·</span> <a class="progress-index" href="/all/">Index</a>`;
     progress.classList.add('visible');
     window.dispatchEvent(new CustomEvent('quoteViewed', { detail: currentQuoteIndex }));
   } else {
-    progress.classList.remove('visible');
-    progress.textContent = '';
+    progress.innerHTML = `<a class="progress-index" href="/all/">Index</a>`;
+    progress.classList.add('visible');
   }
 
   // Pulse the Next button only on the first screen
