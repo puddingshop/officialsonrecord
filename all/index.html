@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Index — On the Record</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+<meta name="description" content="All eighty public statements on UAP — every quote on the site, grouped by chapter, citable, with primary sources.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Index — On the Record">
+<meta property="og:description" content="All eighty public statements on UAP — every quote, grouped by chapter, with primary sources.">
+<meta property="og:site_name" content="On the Record">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Index — On the Record">
+<meta name="twitter:description" content="All eighty public statements on UAP — every quote, grouped by chapter, with primary sources.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ea;
+    --ink: #1A1A1A;
+    --muted: #777777;
+    --rule: #d4cfc2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body { padding: clamp(5.5rem, 9vh, 7.5rem) 6vw 6rem; }
+
+  /* Wordmark — top-left, two lines, tight leading */
+  .wordmark {
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    left: clamp(1.25rem, 2.5vw, 2rem);
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--ink);
+    text-decoration: none;
+    z-index: 10;
+    transition: opacity 200ms;
+  }
+  .wordmark:hover { opacity: 0.6; }
+
+  /* Top-right stacked nav */
+  .top-nav {
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    right: clamp(1.25rem, 2.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: flex-end;
+    z-index: 10;
+  }
+  .top-nav a {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 200ms;
+  }
+  .top-nav a:hover { color: var(--ink); }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .page-eyebrow {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+
+  .page-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 600;
+    font-variation-settings: "opsz" 48;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+  }
+
+  .page-sub {
+    font-family: 'Newsreader', Georgia, serif;
+    font-variation-settings: "opsz" 14;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    color: var(--muted);
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto 5rem;
+    line-height: 1.55;
+    text-wrap: pretty;
+  }
+
+  /* Chapter divider */
+  .chapter {
+    margin: 5rem 0 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .chapter:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .chapter-eyebrow {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .chapter-title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(1.4rem, 2.6vw, 1.95rem);
+    font-weight: 600;
+    font-variation-settings: "opsz" 48;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  /* Entry */
+  .entry {
+    display: block;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: opacity 200ms;
+  }
+  .entry:last-child { border-bottom: none; }
+  .entry:hover { opacity: 0.62; }
+  .entry:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 0.5rem;
+  }
+
+  .entry-eyebrow {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 1.4rem;
+  }
+
+  .entry-quote {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(1.2rem, 2.1vw, 1.55rem);
+    font-weight: 500;
+    font-variation-settings: "opsz" 24;
+    line-height: 1.4;
+    letter-spacing: -0.003em;
+    margin-bottom: 1.6rem;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  .entry-meta {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.6rem;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+
+  .entry-speaker {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .entry-verify {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    margin-left: 0.5rem;
+    transition: color 200ms, border-color 200ms;
+    white-space: nowrap;
+  }
+  .entry-verify:hover {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+  }
+  .entry-verify-arrow {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-left: 0.2em;
+    vertical-align: -0.05em;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 640px) {
+    body { padding: 5rem 5vw 4rem; }
+    .wordmark { font-size: 0.6rem; letter-spacing: 0.1em; }
+    .top-nav a { font-size: 0.6rem; letter-spacing: 0.12em; }
+    .top-nav { gap: 0.35rem; }
+    .entry { padding: 2.25rem 0; }
+    .chapter { margin: 3.5rem 0 2.25rem; padding-top: 2rem; }
+    .page-sub { margin-bottom: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<a class="wordmark" href="/" aria-label="Officials on Record — home">OFFICIALS<br>ON RECORD</a>
+
+<nav class="top-nav" aria-label="Site sections">
+  <a href="/">Read sequentially</a>
+  <a href="/reading/">Further reading</a>
+</nav>
+
+<main>
+  <p class="page-eyebrow">Index</p>
+  <h1 class="page-title">All 80 statements.</h1>
+  <p class="page-sub">Every quote on the site, grouped by chapter. Click any to open it in the slideshow.</p>
+  <div id="entries"></div>
+</main>
+
+<script src="/data.js"></script>
+<script>
+(function() {
+  const screens = window.OOR_SCREENS || [];
+  const slugs = window.OOR_buildSlugs(screens);
+  const root = document.getElementById('entries');
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[c]);
+  }
+
+  const arrowSvg = '<svg class="entry-verify-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>';
+
+  let html = '';
+  let chapterOpen = false;
+
+  screens.forEach((s, i) => {
+    if (s.type === 'section') {
+      if (chapterOpen) html += '</section>';
+      html += '<section>';
+      html += '<div class="chapter">';
+      html += '<div class="chapter-eyebrow">Chapter ' + esc(s.eyebrow) + '</div>';
+      html += '<h2 class="chapter-title">' + esc(s.title) + '</h2>';
+      html += '</div>';
+      chapterOpen = true;
+    } else if (s.type === 'quote') {
+      const slug = slugs[i] || '';
+      html += '<article class="entry" data-slug="' + esc(slug) + '" tabindex="0" role="link" aria-label="Read ' + esc(s.speaker) + ' quote in slideshow">';
+      if (s.eyebrow) html += '<div class="entry-eyebrow">' + esc(s.eyebrow) + '</div>';
+      html += '<div class="entry-quote">&ldquo;' + esc(s.text) + '&rdquo;</div>';
+      html += '<div class="entry-meta">';
+      html += '<span class="entry-speaker">' + esc(s.speaker) + '</span> · ' + esc(s.credential) + ' · ' + esc(s.date);
+      if (s.source) {
+        html += ' <a class="entry-verify" href="' + esc(s.source) + '" target="_blank" rel="noopener">Source' + arrowSvg + '</a>';
+      }
+      html += '</div>';
+      html += '</article>';
+    }
+  });
+  if (chapterOpen) html += '</section>';
+
+  if (!html) {
+    html = '<p class="empty-state">No statements found. <a href="/">Return home</a>.</p>';
+  }
+
+  root.innerHTML = html;
+
+  // Click any entry → /#slug (boots slideshow at that quote)
+  root.addEventListener('click', (e) => {
+    // Don't hijack clicks on the inner Source link
+    if (e.target.closest('.entry-verify')) return;
+    const entry = e.target.closest('.entry');
+    if (!entry) return;
+    const slug = entry.dataset.slug;
+    if (slug) window.location.href = '/#' + slug;
+  });
+
+  // Keyboard: Enter/Space on focused entry navigates
+  root.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const entry = e.target.closest('.entry');
+    if (!entry) return;
+    e.preventDefault();
+    const slug = entry.dataset.slug;
+    if (slug) window.location.href = '/#' + slug;
+  });
+})();
+</script>
+
+</body>
+</html>
