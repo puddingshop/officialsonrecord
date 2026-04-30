@@ -28,11 +28,55 @@
   }
 
   body {
-    padding: 4vh 6vw;
+    padding: clamp(5.5rem, 9vh, 7.5rem) 6vw 6rem;
     max-width: 1100px;
     margin: 0 auto;
   }
 
+  /* Wordmark — top-left, matches home */
+  .wordmark {
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    left: clamp(1.25rem, 2.5vw, 2rem);
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.05;
+    color: var(--ink);
+    text-decoration: none;
+    z-index: 10;
+    transition: opacity 200ms;
+  }
+  .wordmark:hover { opacity: 0.6; }
+
+  /* Top-right stacked nav — matches home */
+  .top-nav {
+    position: fixed;
+    top: clamp(1.25rem, 2.5vh, 2rem);
+    right: clamp(1.25rem, 2.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: flex-end;
+    z-index: 10;
+  }
+  .top-nav a {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 200ms;
+  }
+  .top-nav a:hover { color: var(--ink); }
+
+  /* Footer back link (kept for end-of-page nav) */
   .back-link {
     font-family: 'Public Sans', -apple-system, sans-serif;
     letter-spacing: 0.14em;
@@ -42,21 +86,8 @@
     color: var(--muted);
     text-decoration: none;
     display: inline-block;
-    margin-bottom: 6rem;
     transition: color 200ms;
   }
-
-  .back-link.top {
-    position: fixed;
-    top: clamp(1.25rem, 2.5vh, 2rem);
-    left: clamp(1.25rem, 2.5vw, 2rem);
-    margin-bottom: 0;
-    z-index: 10;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-  }
-
   .back-link:hover { color: var(--ink); }
 
   .arrow {
@@ -68,15 +99,38 @@
   }
   .arrow.arrow-left { margin-left: 0; margin-right: 0.35em; }
 
+  /* Section-frame box around the page heading — mirrors home Chapter screens */
+  .section-frame {
+    border: 1px solid var(--rule);
+    padding: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.5rem);
+    max-width: 1100px;
+    margin: 0 auto 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-eyebrow {
+    font-family: 'Public Sans', -apple-system, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
   h1 {
     font-family: 'Newsreader', Georgia, serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
     font-weight: 600;
     font-variation-settings: "opsz" 48;
     letter-spacing: -0.015em;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     text-wrap: balance;
+    text-align: center;
   }
 
   .intro {
@@ -86,11 +140,9 @@
     color: var(--muted);
     max-width: 640px;
     line-height: 1.55;
-    margin-bottom: 0.3em;
-  }
-
-  .intro:last-of-type {
-    margin-bottom: 5rem;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    text-wrap: pretty;
   }
 
   .section-label {
@@ -162,13 +214,14 @@
   }
 
   @media (max-width: 640px) {
-    .back-link { margin-bottom: 3rem; }
-    .back-link.top {
-      position: static;
-      margin-bottom: 3rem;
-    }
-    h1 { margin-bottom: 1rem; }
-    .intro { margin-bottom: 3rem; }
+    body { padding: 5rem 5vw 4rem; }
+    .wordmark { font-size: 0.6rem; letter-spacing: 0.1em; }
+    .top-nav a { font-size: 0.6rem; letter-spacing: 0.12em; }
+    .top-nav { gap: 0.35rem; }
+
+    .section-frame { margin-bottom: 4rem; padding: 2.25rem 1.25rem; }
+    h1 { margin-bottom: 0; }
+    .intro { margin-top: 1.25rem; }
     .section-label { margin-top: 4rem; }
     .entry { padding: 1.5rem 0; }
   }
@@ -176,10 +229,17 @@
 </head>
 <body>
 
-<a class="back-link top" href="/"><svg class="arrow arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Statements</a>
+<a class="wordmark" href="/" aria-label="Officials on Record — home">OFFICIALS<br>ON RECORD</a>
 
-<h1>Further reading</h1>
-<p class="intro">Primary-source documents, hosted by the issuing body where possible.</p>
+<nav class="top-nav" aria-label="Site sections">
+  <a href="/">Statements</a>
+  <a href="/all/">Index</a>
+</nav>
+
+<div class="section-frame">
+  <h1>Further reading</h1>
+  <p class="intro">Primary-source documents, hosted by the issuing body where possible.</p>
+</div>
 
 <div class="list">
 

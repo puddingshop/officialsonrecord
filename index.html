@@ -157,14 +157,23 @@
     font-size: 0.56rem;
     color: var(--muted);
     text-decoration: none;
+    transition: color 200ms;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  /* Underline only the word, not the arrow */
+  .source-link .verify-word {
     border-bottom: 1px solid var(--rule);
     padding-bottom: 3px;
-    transition: color 200ms, border-color 200ms;
-    display: inline-block;
+    transition: border-color 200ms;
   }
 
   .source-link:hover {
     color: var(--ink);
+  }
+
+  .source-link:hover .verify-word {
     border-bottom-color: var(--ink);
   }
 
@@ -784,7 +793,7 @@ function render() {
           <div class="attribution">${s.speaker}</div>
           <div class="credential">${s.credential}</div>
           <div class="date">${s.date}</div>
-          <a class="source-link" href="${s.source}" target="_blank" rel="noopener">Verify<svg class="verify-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg></a>
+          <a class="source-link" href="${s.source}" target="_blank" rel="noopener"><span class="verify-word">Verify</span><svg class="verify-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></a>
         </div>
       `;
     } else if (s.type === 'closing') {
