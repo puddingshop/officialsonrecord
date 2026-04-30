@@ -49,27 +49,23 @@
     z-index: 10;
   }
 
-  /* "← Back" reveal under wordmark on hover/focus — muted, subtle */
+  /* "←" reveal under wordmark on hover/focus — matches wordmark line-spacing & weight, muted */
   .wordmark-back {
     display: block;
-    margin-top: 0.55rem;
     color: var(--muted);
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
+    /* font-size, line-height, letter-spacing, font-weight inherit from .wordmark */
     opacity: 0;
-    transform: translateY(-2px);
-    transition: opacity 220ms ease, transform 220ms ease;
+    transition: opacity 220ms ease;
   }
   .wordmark-back svg {
-    width: 0.95em;
-    height: 0.95em;
+    width: 1em;
+    height: 1em;
     vertical-align: -0.1em;
-    margin-right: 0.35em;
+    stroke-width: 1.5;
   }
   .wordmark:hover .wordmark-back,
   .wordmark:focus-visible .wordmark-back {
     opacity: 1;
-    transform: translateY(0);
   }
 
   /* Footer back link (kept for end-of-page nav) */
@@ -244,11 +240,7 @@
     opacity: 0.5;
   }
 
-  footer {
-    margin-top: 6rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--rule);
-  }
+  /* Footer removed — wordmark hover provides back nav */
 
   @media (max-width: 640px) {
     body { padding: 5rem 5vw 4rem; }
@@ -266,7 +258,7 @@
 <body>
 
 <a class="wordmark" href="/" aria-label="Officials on Record — back to statements">
-  OFFICIALS<br>ON RECORD<span class="wordmark-back" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Back</span>
+  OFFICIALS<br>ON RECORD<span class="wordmark-back" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
 </a>
 
 <div class="section-frame">
@@ -393,10 +385,6 @@
   });
 })();
 </script>
-
-<footer>
-  <a class="back-link" href="/" style="margin-bottom: 0;"><svg class="arrow arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Statements</a>
-</footer>
 
 </body>
 </html>
