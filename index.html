@@ -416,16 +416,16 @@
   }
 
 
-  /* Survey widget — slim banner below the fixed nav */
+  /* Survey widget — dark banner flush to top */
   .survey {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 5;
-    background: rgba(26, 26, 26, 0.15);
-    color: var(--ink);
-    padding: 0.4rem clamp(2.5rem, 5vw, 3rem) 0.4rem clamp(1rem, 4vw, 2rem);
+    z-index: 25;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.55rem clamp(2.5rem, 5vw, 3rem) 0.55rem clamp(1rem, 4vw, 2rem);
     min-height: 36px;
     display: flex;
     align-items: center;
@@ -433,8 +433,10 @@
     gap: 1rem;
     flex-wrap: wrap;
     font-family: 'Public Sans', -apple-system, sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.02em;
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     opacity: 0;
     transition: opacity 400ms ease;
   }
@@ -459,15 +461,15 @@
   .survey-step[hidden] { display: none; }
 
   .survey-prompt {
-    color: var(--ink);
+    color: var(--bg);
     font-weight: 500;
   }
 
   .survey-btn {
     background: none;
-    border: 1px solid rgba(26, 26, 26, 0.25);
-    color: var(--ink);
-    padding: 0.15rem 0.5rem;
+    border: 1px solid rgba(245, 242, 234, 0.35);
+    color: var(--bg);
+    padding: 0.2rem 0.55rem;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.85rem;
@@ -476,9 +478,9 @@
   }
 
   .survey-btn:hover {
-    border-color: var(--ink);
-    background: var(--ink);
-    color: var(--bg);
+    border-color: var(--bg);
+    background: var(--bg);
+    color: var(--ink);
   }
 
   .survey-dismiss {
@@ -489,13 +491,13 @@
     background: none;
     border: none;
     font-size: 1.1rem;
-    color: rgba(26, 26, 26, 0.5);
+    color: rgba(245, 242, 234, 0.5);
     cursor: pointer;
     line-height: 1;
     padding: 0.15rem 0.5rem;
   }
 
-  .survey-dismiss:hover { color: var(--ink); }
+  .survey-dismiss:hover { color: var(--bg); }
 
   .arrow {
     width: 0.95em;
@@ -704,17 +706,17 @@
 
 <aside class="survey" id="survey" aria-label="Reader survey" hidden>
   <div class="survey-step survey-q1">
-    <span class="survey-prompt">Do you think UAP are a serious topic?</span>
-    <button class="survey-btn" data-q="1" data-v="yes" aria-label="Yes">👍</button>
-    <button class="survey-btn" data-q="1" data-v="no" aria-label="No">👎</button>
+    <span class="survey-prompt">Did you take this seriously before reading?</span>
+    <button class="survey-btn" data-q="1" data-v="yes" aria-label="Yes">Yes</button>
+    <button class="survey-btn" data-q="1" data-v="no" aria-label="No">No</button>
   </div>
   <div class="survey-step survey-q2" hidden>
-    <span class="survey-prompt">Has this changed your mind?</span>
-    <button class="survey-btn" data-q="2" data-v="yes" aria-label="Yes">👍</button>
-    <button class="survey-btn" data-q="2" data-v="no" aria-label="No">👎</button>
+    <span class="survey-prompt">Has this changed your thinking?</span>
+    <button class="survey-btn" data-q="2" data-v="yes" aria-label="Yes">Yes</button>
+    <button class="survey-btn" data-q="2" data-v="no" aria-label="No">No</button>
   </div>
   <div class="survey-step survey-thanks" hidden>
-    <span class="survey-prompt">Thanks for the feedback.</span>
+    <span class="survey-prompt">Thank you.</span>
   </div>
   <button class="survey-dismiss" id="survey-dismiss" aria-label="Dismiss survey">×</button>
 </aside>
