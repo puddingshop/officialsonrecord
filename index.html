@@ -231,21 +231,17 @@
     opacity: 0.7;
   }
 
-  /* First-screen glow: feathered breathing pulse on Next button */
+  /* First-screen pulse on Next button — gentle scale, no glow (any shadow muddies on cream) */
   .nav-btn.pulse {
     color: var(--ink);
     border-color: var(--ink);
-    animation: pulse-glow 2.4s ease-in-out infinite;
+    animation: pulse-scale 2.4s ease-in-out infinite;
+    transform-origin: center;
   }
 
-  @keyframes pulse-glow {
-    /* Warm dark brown so the glow sits in the cream palette, not on top of it */
-    0%, 100% {
-      box-shadow: 0 0 12px 4px rgba(80, 65, 50, 0.12);
-    }
-    50% {
-      box-shadow: 0 0 28px 12px rgba(80, 65, 50, 0.22);
-    }
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.035); }
   }
 
   .intro-eyebrow {
