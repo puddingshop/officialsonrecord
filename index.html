@@ -442,6 +442,12 @@
   .survey.visible { opacity: 1; }
   .survey[hidden] { display: none; }
 
+  /* When survey is open, slide fixed nav elements down below the banner */
+  body.survey-open .wordmark,
+  body.survey-open .top-nav {
+    top: calc(clamp(1.25rem, 2.5vh, 2rem) + 36px);
+  }
+
   .survey-step {
     display: flex;
     align-items: center;
@@ -576,7 +582,7 @@
     color: var(--ink);
     text-decoration: none;
     z-index: 10;
-    transition: opacity 200ms;
+    transition: opacity 200ms, top 400ms ease;
   }
   .wordmark:hover { opacity: 0.6; }
 
@@ -585,6 +591,7 @@
     position: fixed;
     top: clamp(1.25rem, 2.5vh, 2rem);
     right: clamp(1.25rem, 2.5vw, 2rem);
+    transition: top 400ms ease;
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
@@ -955,6 +962,7 @@ render();
     if (e.detail < SHOW_AFTER_QUOTES) return;
     shown = true;
     survey.hidden = false;
+    document.body.classList.add('survey-open');
     requestAnimationFrame(() => survey.classList.add('visible'));
   });
 
@@ -966,6 +974,7 @@ render();
   survey.addEventListener('click', async (e) => {
     if (e.target.closest('.survey-dismiss')) {
       survey.hidden = true;
+      document.body.classList.remove('survey-open');
       localStorage.setItem(STORAGE_KEY, 'dismissed');
       return;
     }
@@ -1010,7 +1019,7 @@ render();
     }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, outcome }));
-    setTimeout(() => { survey.hidden = true; }, 3500);
+    setTimeout(() => { survey.hidden = true; document.body.classList.remove('survey-open'); }, 3500);
   });
 })();
 </script>
