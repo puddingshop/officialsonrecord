@@ -975,8 +975,8 @@ render();
 
   survey.addEventListener('click', async (e) => {
     if (e.target.closest('.survey-dismiss')) {
-      survey.hidden = true;
-      document.body.classList.remove('survey-open');
+      survey.classList.remove('visible');
+      setTimeout(() => { survey.hidden = true; document.body.classList.remove('survey-open'); }, 400);
       localStorage.setItem(STORAGE_KEY, 'dismissed');
       return;
     }
@@ -1021,7 +1021,10 @@ render();
     }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...state, outcome }));
-    setTimeout(() => { survey.hidden = true; document.body.classList.remove('survey-open'); }, 3500);
+    setTimeout(() => {
+      survey.classList.remove('visible');
+      setTimeout(() => { survey.hidden = true; document.body.classList.remove('survey-open'); }, 400);
+    }, 3000);
   });
 })();
 </script>
