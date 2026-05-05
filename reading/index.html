@@ -3,387 +3,509 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Further reading · Officials on the Record</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛸</text></svg>">
-<meta name="description" content="Primary-source documents on unidentified anomalous phenomena referenced throughout On the Record.">
-
+<title>Further Reading · Officials on the Record</title>
+<meta name="description" content="Primary-source documents on unidentified anomalous phenomena referenced throughout Officials on the Record.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f2ea;
-    --ink: #1A1A1A;
-    --muted: #777777;
-    --rule: #d4cfc2;
+    --bg: #0e1518;
+    --bg-raised: #141c1f;
+    --bg-card: #1a2428;
+    --fg: #d4cfc8;
+    --fg-soft: #a09a92;
+    --fg-faint: #5a5650;
+    --accent: #c4a882;
+    --accent-dim: #7a6a54;
+    --rule: #2a3438;
+    --white: #e8e2da;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html, body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Newsreader', Georgia, serif;
-    min-height: 100vh;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
-    padding: clamp(5.5rem, 9vh, 7.5rem) 6vw 6rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  /* Wordmark — top-left, matches home; doubles as back-to-home with reveal arrow */
-  .wordmark {
-    position: fixed;
-    top: clamp(1.25rem, 2.5vh, 2rem);
-    left: clamp(1.25rem, 2.5vw, 2rem);
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    font-weight: 500;
-    line-height: 1.05;
-    color: var(--ink);
-    text-decoration: none;
-    z-index: 10;
-  }
-
-  /* "←" reveal under wordmark on hover/focus — matches wordmark line-spacing & weight, muted */
-  .wordmark-back {
-    display: block;
-    color: var(--muted);
-    /* font-size, line-height, letter-spacing, font-weight inherit from .wordmark */
-    opacity: 0;
-    transition: opacity 220ms ease;
-  }
-  .wordmark-back svg {
-    width: 1em;
-    height: 1em;
-    vertical-align: -0.1em;
-    stroke-width: 1.5;
-  }
-  .wordmark:hover .wordmark-back,
-  .wordmark:focus-visible .wordmark-back {
-    opacity: 1;
-  }
-
-  /* Footer back link (kept for end-of-page nav) */
-  .back-link {
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-decoration: none;
-    display: inline-block;
-    transition: color 200ms;
-  }
-  .back-link:hover { color: var(--ink); }
-
-  .arrow {
-    width: 0.95em;
-    height: 0.95em;
-    vertical-align: -0.1em;
-    display: inline-block;
-    margin-left: 0.35em;
-  }
-  .arrow.arrow-left { margin-left: 0; margin-right: 0.35em; }
-
-  /* Section-frame box around the page heading — mirrors home Chapter screens */
-  .section-frame {
-    border: 1px solid var(--rule);
-    padding: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4.5rem);
-    max-width: 1100px;
-    margin: 0 auto 6rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
   }
 
-  .section-eyebrow {
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: var(--muted);
-    margin-bottom: 2rem;
-  }
-
-  h1 {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: clamp(2.6rem, 6vw, 4.8rem);
-    font-weight: 600;
-    font-variation-settings: "opsz" 48;
-    letter-spacing: -0.015em;
-    line-height: 1.1;
-    margin-bottom: 0;
-    text-wrap: balance;
-    text-align: center;
-  }
-
-  .intro {
-    font-family: 'Newsreader', Georgia, serif;
-    font-variation-settings: "opsz" 14;
-    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-    color: var(--muted);
-    max-width: 640px;
-    line-height: 1.55;
-    margin: 1.5rem auto 0;
-    text-align: center;
-    text-wrap: pretty;
-  }
-
-  .section-label {
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--muted);
-    margin-top: 6rem;
-    margin-bottom: 0.6rem;
-  }
-
-  .section-note {
-    font-family: 'Newsreader', Georgia, serif;
-    font-variation-settings: "opsz" 14;
-    font-size: 1rem;
-    font-style: italic;
-    color: var(--muted);
-    max-width: 640px;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-  }
-
-  /* Filter toggle — Government / Science / Community */
-  .filter-toggle {
+  /* ── MASTHEAD ── */
+  .masthead {
+    padding: 22px 48px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
+  }
+
+  .masthead-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+    text-decoration: none;
+  }
+
+  .masthead-logo:hover { color: var(--accent); }
+
+  .masthead-nav {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .masthead-nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .masthead-nav a:hover { color: var(--accent); }
+  .masthead-nav a.active { color: var(--fg-soft); }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 48px 60px;
+    width: 100%;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .page-kicker {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    margin-bottom: 24px;
+  }
+
+  .page-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .page-title em { font-style: italic; color: var(--accent); }
+
+  .page-desc {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--fg-soft);
+    font-style: italic;
+    max-width: 560px;
+  }
+
+  /* ── FILTER TABS ── */
+  .filters {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 48px;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--rule);
     flex-wrap: wrap;
-    gap: 2.25rem;
-    margin: 0 auto 4rem;
-    font-family: 'Public Sans', -apple-system, sans-serif;
   }
 
   .filter-btn {
-    background: none;
-    border: none;
-    padding: 0.4rem 0;
-    color: var(--muted);
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 0.7rem;
-    font-weight: 500;
-    border-bottom: 1px solid transparent;
-    transition: color 200ms ease, border-color 200ms ease;
-  }
-
-  .filter-btn:hover { color: var(--ink); }
-
-  .filter-btn.active {
-    color: var(--ink);
-    border-bottom-color: var(--ink);
-  }
-
-  .filter-count {
-    font-variant-numeric: tabular-nums;
-    margin-left: 0.5em;
-    opacity: 0.55;
-    font-weight: 400;
-  }
-
-  .list {
-    border-top: 1px solid var(--rule);
-  }
-
-  .entry[hidden] { display: none; }
-
-  .entry {
-    display: block;
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--rule);
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 200ms;
-  }
-
-  .entry:hover { opacity: 0.55; }
-
-  .entry-title {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: clamp(1.55rem, 2.7vw, 2.15rem);
-    font-weight: 500;
-    font-variation-settings: "opsz" 36;
-    letter-spacing: -0.008em;
-    line-height: 1.22;
-    margin-bottom: 0.7rem;
-    text-wrap: balance;
-  }
-
-  .entry-meta {
-    font-family: 'Public Sans', -apple-system, sans-serif;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-size: 0.72rem;
-    color: var(--muted);
-    font-weight: 500;
+    color: var(--fg-faint);
+    background: none;
+    border: 1px solid var(--rule);
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
 
-  .entry-meta .sep {
-    margin: 0 0.6em;
-    opacity: 0.5;
+  .filter-btn:hover { border-color: var(--accent-dim); color: var(--fg-soft); }
+  .filter-btn.active { border-color: var(--accent-dim); color: var(--accent); background: rgba(196, 168, 130, 0.05); }
+
+  /* ── READING LIST ── */
+  .reading-list {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 120px;
+    width: 100%;
+    flex: 1;
   }
 
-  /* Footer removed — wordmark hover provides back nav */
+  .reading-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    transition: background 0.15s;
+  }
 
-  @media (max-width: 640px) {
-    body { padding: 5rem 5vw 4rem; }
-    .wordmark { font-size: 0.6rem; letter-spacing: 0.1em; }
-    .wordmark-back { font-size: 0.55rem; }
+  .reading-item:first-child { border-top: 1px solid var(--rule); margin-top: 32px; }
 
-    .section-frame { margin-bottom: 4rem; padding: 2.25rem 1.25rem; }
-    h1 { margin-bottom: 0; }
-    .intro { margin-top: 1.25rem; }
-    .section-label { margin-top: 4rem; }
-    .entry { padding: 1.5rem 0; }
+  .reading-item:hover .reading-title { color: var(--accent); }
+
+  .reading-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.35;
+    color: var(--white);
+    margin-bottom: 10px;
+    transition: color 0.2s;
+    font-style: italic;
+  }
+
+  .reading-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    align-items: center;
+  }
+
+  .reading-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--fg-soft);
+  }
+
+  .reading-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--fg-faint);
+  }
+
+  .reading-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-dim);
+    border: 1px solid var(--accent-dim);
+    padding: 2px 8px;
+  }
+
+  .reading-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--fg-faint);
+    padding-top: 4px;
+    flex-shrink: 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .reading-item:hover .reading-arrow {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .reading-item[data-cat].hidden { display: none; }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .footer-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--fg-faint);
+  }
+
+  .footer-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-dim);
+    padding-bottom: 2px;
+  }
+
+  .footer-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .masthead { padding: 16px 24px; flex-wrap: wrap; gap: 12px; }
+    .masthead-nav { gap: 20px; }
+    .page-header { padding: 60px 24px 40px; }
+    .filters { padding: 24px; }
+    .reading-list { padding: 0 24px 80px; }
+    .reading-item { grid-template-columns: 1fr; gap: 8px; }
+    .footer { padding: 16px 24px; flex-direction: column; gap: 12px; }
   }
 </style>
 </head>
 <body>
 
-<a class="wordmark" href="/" aria-label="Officials on Record — back to statements">
-  OFFICIALS<br>ON RECORD<span class="wordmark-back" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg></span>
-</a>
+<header class="masthead">
+  <a href="/" class="masthead-logo">Officials on the Record</a>
+  <nav>
+    <ul class="masthead-nav">
+      <li><a href="/">Quotes</a></li>
+      <li><a href="/essay/">Essay</a></li>
+      <li><a href="/reading/" class="active">Further Reading</a></li>
+      <li><a href="/essay/#method">About</a></li>
+    </ul>
+  </nav>
+</header>
 
-<div class="section-frame">
-  <h1>Further reading</h1>
-  <p class="intro">Primary-source documents, hosted by the issuing body where possible.</p>
+<div class="page-header">
+  <div class="page-kicker">Primary sources</div>
+  <h1 class="page-title">Further <em>Reading</em></h1>
+  <p class="page-desc">Primary-source documents on unidentified anomalous phenomena, hosted by the issuing body where possible.</p>
 </div>
 
-<nav class="filter-toggle" aria-label="Filter by source type" id="filter-toggle">
-  <button class="filter-btn active" data-filter="all" type="button">All<span class="filter-count">18</span></button>
-  <button class="filter-btn" data-filter="government" type="button">Government<span class="filter-count">8</span></button>
-  <button class="filter-btn" data-filter="science" type="button">Science<span class="filter-count">9</span></button>
-  <button class="filter-btn" data-filter="community" type="button">Community<span class="filter-count">1</span></button>
-</nav>
-
-<div class="list" id="reading-list">
-
-  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/PLAW-117publ263/pdf/PLAW-117publ263.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">First US federal law to define UAP. NDAA 2023</h2>
-    <p class="entry-meta">117th US Congress<span class="sep">·</span>Dec 2022</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://arxiv.org/pdf/2502.06794" target="_blank" rel="noopener">
-    <h2 class="entry-title">Stanford-led review. 30 scientists on UAP science</h2>
-    <p class="entry-meta">Stanford<span class="sep">·</span>Knuth, Nolan, Powell et al.<span class="sep">·</span>arXiv<span class="sep">·</span>Feb 2025</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg57440/pdf/CHRG-118hhrg57440.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">2024 Joint Subcommittee Hearing. Sworn UAP testimony</h2>
-    <p class="entry-meta">US House of Representatives<span class="sep">·</span>Nov 2024</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">Grusch, Graves &amp; Fravor. Sworn House Oversight testimony</h2>
-    <p class="entry-meta">US House of Representatives<span class="sep">·</span>Jul 2023</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-2024-0263-AARO-HISTORICAL-RECORD-REPORT-VOLUME-1-2024.PDF" target="_blank" rel="noopener">
-    <h2 class="entry-title">Pentagon's historical review of UAP investigations</h2>
-    <p class="entry-meta">All-domain Anomaly Resolution Office (AARO)<span class="sep">·</span>Mar 2024</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.defense.gov/News/Releases/Release/Article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/" target="_blank" rel="noopener">
-    <h2 class="entry-title">Pentagon confirms the Navy UAP videos are authentic</h2>
-    <p class="entry-meta">Department of Defense<span class="sep">·</span>Apr 2020</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/FY2023-Consolidated-Annual-Report-UAP-Oct2023.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">2023 US Intelligence annual UAP report to Congress</h2>
-    <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Oct 2023</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/Unclassified-2022-Annual-Report-UAP.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">2022 US Intelligence annual UAP report to Congress</h2>
-    <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jan 2023</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://www.dni.gov/files/ODNI/documents/assessments/Prelimary-Assessment-UAP-20210625.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">US Intelligence's first public UAP assessment (2021)</h2>
-    <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jun 2021</p>
-  </a>
-
-  <a class="entry" data-category="government" href="https://documents2.theblackvault.com/documents/odni/DEOM-2021-00006.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">Classified UAP assessment, released via FOIA (2021)</h2>
-    <p class="entry-meta">Office of the Director of National Intelligence<span class="sep">·</span>Jun 2021</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://science.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">NASA convenes 16 scientists for independent UAP study</h2>
-    <p class="entry-meta">NASA Independent Study Team<span class="sep">·</span>Sep 2023</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://arxiv.org/pdf/2209.02479" target="_blank" rel="noopener">
-    <h2 class="entry-title">Avi Loeb's Galileo Project. Harvard's UAP search</h2>
-    <p class="entry-meta">Harvard<span class="sep">·</span>Avi Loeb &amp; Frank Laukien<span class="sep">·</span>2022</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://www.mdpi.com/1099-4300/21/10/939" target="_blank" rel="noopener">
-    <h2 class="entry-title">Navy UAP defy known physics. Peer-reviewed analysis</h2>
-    <p class="entry-meta">Knuth, Powell &amp; Reali<span class="sep">·</span>Entropy (peer-reviewed)<span class="sep">·</span>Oct 2019</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://thesolfoundation.org/wp-content/uploads/2023/07/Sol_WhitePaper_Vol1N1.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">Rear Admiral, PhD &amp; former NOAA Administrator. On UAP in the ocean</h2>
-    <p class="entry-meta">Tim Gallaudet<span class="sep">·</span>Sol Foundation<span class="sep">·</span>Mar 2024</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://ia800403.us.archive.org/17/items/pdfy-NRIQie2ooVehep7K/The%20Cometa%20Report%20%5BUFO%27s%20And%20Defense%20-%20What%20Should%20We%20Prepare%20For%5D.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">French Defence Report. UFOs and Defense, What Should We Prepare For?</h2>
-    <p class="entry-meta">Comité d'Études Approfondies (COMETA)<span class="sep">·</span>1999</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/ufo/french_gov_ufo_study.pdf" target="_blank" rel="noopener">
-    <h2 class="entry-title">GEPAN. France's official 21-year UFO study</h2>
-    <p class="entry-meta">National Security Agency archive<span class="sep">·</span>1999</p>
-  </a>
-
-  <a class="entry" data-category="science" href="https://www.archives.gov/research/military/air-force/ufos" target="_blank" rel="noopener">
-    <h2 class="entry-title">Project Blue Book. USAF's 17-year UFO investigation</h2>
-    <p class="entry-meta">US Air Force<span class="sep">·</span>1985</p>
-  </a>
-
-  <a class="entry" data-category="community" href="https://pdfhost.io/v/gR8lAdgVd_Uap_Timeline_Prepared_By_Another" target="_blank" rel="noopener">
-    <h2 class="entry-title">Public UAP Timeline</h2>
-    <p class="entry-meta">Independent compilation</p>
-  </a>
-
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="government">Government</button>
+  <button class="filter-btn" data-filter="science">Science</button>
+  <button class="filter-btn" data-filter="community">Community</button>
 </div>
+
+<main class="reading-list">
+
+  <a class="reading-item" href="https://www.govinfo.gov/content/pkg/PLAW-117publ263/pdf/PLAW-117publ263.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">First US federal law to define UAP. NDAA 2023</div>
+      <div class="reading-meta">
+        <span class="reading-source">117th US Congress</span>
+        <span class="reading-date">Dec 2022</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://arxiv.org/pdf/2502.06794" target="_blank" rel="noopener" data-cat="science">
+    <div>
+      <div class="reading-title">Stanford-led review. 30 scientists on UAP science</div>
+      <div class="reading-meta">
+        <span class="reading-source">Knuth, Nolan, Powell et al. · arXiv</span>
+        <span class="reading-date">Feb 2025</span>
+        <span class="reading-tag">Science</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg57440/pdf/CHRG-118hhrg57440.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">2024 Joint Subcommittee Hearing. Sworn UAP testimony</div>
+      <div class="reading-meta">
+        <span class="reading-source">US House of Representatives</span>
+        <span class="reading-date">Nov 2024</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.govinfo.gov/content/pkg/CHRG-118hhrg53022/pdf/CHRG-118hhrg53022.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">Grusch, Graves & Fravor. Sworn House Oversight testimony</div>
+      <div class="reading-meta">
+        <span class="reading-source">US House of Representatives</span>
+        <span class="reading-date">Jul 2023</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-2024-0263-AARO-HISTORICAL-RECORD-REPORT-VOLUME-1-2024.PDF" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">Pentagon's historical review of UAP investigations</div>
+      <div class="reading-meta">
+        <span class="reading-source">All-domain Anomaly Resolution Office (AARO)</span>
+        <span class="reading-date">Mar 2024</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.defense.gov/News/Releases/Release/Article/2165713/statement-by-the-department-of-defense-on-the-release-of-historical-navy-videos/" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">Pentagon confirms the Navy UAP videos are authentic</div>
+      <div class="reading-meta">
+        <span class="reading-source">Department of Defense</span>
+        <span class="reading-date">Apr 2020</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.dni.gov/files/ODNI/documents/assessments/FY2023-Consolidated-Annual-Report-UAP-Oct2023.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">2023 US Intelligence annual UAP report to Congress</div>
+      <div class="reading-meta">
+        <span class="reading-source">Office of the Director of National Intelligence</span>
+        <span class="reading-date">Oct 2023</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.dni.gov/files/ODNI/documents/assessments/Prelimary-Assessment-UAP-20210625.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">US Intelligence's first public UAP assessment</div>
+      <div class="reading-meta">
+        <span class="reading-source">Office of the Director of National Intelligence</span>
+        <span class="reading-date">Jun 2021</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://science.nasa.gov/wp-content/uploads/2023/09/uap-independent-study-team-final-report.pdf" target="_blank" rel="noopener" data-cat="science">
+    <div>
+      <div class="reading-title">NASA convenes 16 scientists for independent UAP study</div>
+      <div class="reading-meta">
+        <span class="reading-source">NASA Independent Study Team</span>
+        <span class="reading-date">Sep 2023</span>
+        <span class="reading-tag">Science</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://arxiv.org/pdf/2209.02479" target="_blank" rel="noopener" data-cat="science">
+    <div>
+      <div class="reading-title">Avi Loeb's Galileo Project. Harvard's UAP search</div>
+      <div class="reading-meta">
+        <span class="reading-source">Harvard · Avi Loeb & Frank Laukien</span>
+        <span class="reading-date">2022</span>
+        <span class="reading-tag">Science</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.mdpi.com/1099-4300/21/10/939" target="_blank" rel="noopener" data-cat="science">
+    <div>
+      <div class="reading-title">Navy UAP defy known physics. Peer-reviewed analysis</div>
+      <div class="reading-meta">
+        <span class="reading-source">Knuth, Powell & Reali · Entropy (peer-reviewed)</span>
+        <span class="reading-date">Oct 2019</span>
+        <span class="reading-tag">Science</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://thesolfoundation.org/wp-content/uploads/2023/07/Sol_WhitePaper_Vol1N1.pdf" target="_blank" rel="noopener" data-cat="science">
+    <div>
+      <div class="reading-title">Rear Admiral, PhD & former NOAA Administrator. On UAP in the ocean</div>
+      <div class="reading-meta">
+        <span class="reading-source">Tim Gallaudet · Sol Foundation</span>
+        <span class="reading-date">Mar 2024</span>
+        <span class="reading-tag">Science</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://ia800403.us.archive.org/17/items/pdfy-NRIQie2ooVehep7K/The%20Cometa%20Report%20%5BUFO%27s%20And%20Defense%20-%20What%20Should%20We%20Prepare%20For%5D.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">French Defence Report. UFOs and Defense — What Should We Prepare For?</div>
+      <div class="reading-meta">
+        <span class="reading-source">COMETA · Institut des Hautes Études de Défense Nationale</span>
+        <span class="reading-date">1999</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.nsa.gov/portals/75/documents/news-features/declassified-documents/ufo/french_gov_ufo_study.pdf" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">GEPAN. France's official 21-year UFO study</div>
+      <div class="reading-meta">
+        <span class="reading-source">National Security Agency archive</span>
+        <span class="reading-date">1999</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://www.archives.gov/research/military/air-force/ufos" target="_blank" rel="noopener" data-cat="government">
+    <div>
+      <div class="reading-title">Project Blue Book. USAF's 17-year UFO investigation</div>
+      <div class="reading-meta">
+        <span class="reading-source">US Air Force</span>
+        <span class="reading-date">1985</span>
+        <span class="reading-tag">Government</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+  <a class="reading-item" href="https://pdfhost.io/v/gR8lAdgVd_Uap_Timeline_Prepared_By_Another" target="_blank" rel="noopener" data-cat="community">
+    <div>
+      <div class="reading-title">Public UAP Timeline</div>
+      <div class="reading-meta">
+        <span class="reading-source">Independent compilation</span>
+        <span class="reading-date"></span>
+        <span class="reading-tag">Community</span>
+      </div>
+    </div>
+    <div class="reading-arrow">↗</div>
+  </a>
+
+</main>
+
+<footer class="footer">
+  <span class="footer-text">Primary-source documents on unidentified anomalous phenomena</span>
+  <a href="/essay/" class="footer-link">Read the essay →</a>
+</footer>
 
 <script>
-(function() {
-  const buttons = document.querySelectorAll('.filter-btn');
-  const entries = document.querySelectorAll('#reading-list .entry');
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-  function applyFilter(filter) {
-    entries.forEach(entry => {
-      const match = filter === 'all' || entry.dataset.category === filter;
-      entry.hidden = !match;
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.reading-item').forEach(item => {
+      if (filter === 'all' || item.dataset.cat === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
     });
-    buttons.forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
-  }
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
   });
-})();
+});
 </script>
 
 </body>
