@@ -35,32 +35,43 @@
 
   /* ── MASTHEAD ── */
   .masthead {
-    padding: 20px 40px;
+    padding: 22px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--rule);
+    flex-shrink: 0;
   }
 
-  .masthead-left {
+  .masthead-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-soft);
+    text-decoration: none;
+  }
+
+  .masthead-logo:hover { color: var(--accent); }
+
+  .masthead-nav {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .masthead-nav a {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--fg-faint);
-    display: flex;
-    gap: 28px;
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .masthead-left a { color: var(--fg-faint); text-decoration: none; }
-  .masthead-left a:hover { color: var(--accent); }
-
-  .masthead-right {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--fg-faint);
-  }
+  .masthead-nav a:hover { color: var(--accent); }
+  .masthead-nav a.active { color: var(--fg-soft); }
 
   /* ── HERO ── */
   .hero {
@@ -419,7 +430,8 @@
   }
 
   @media (max-width: 768px) {
-    .masthead { padding: 14px 20px; }
+    .masthead { padding: 16px 24px; flex-wrap: wrap; gap: 12px; }
+    .masthead-nav { gap: 20px; }
     .hero { padding: 72px 24px 60px; }
     .article { padding: 60px 24px 80px; font-size: 18px; }
     .pullquote { font-size: 22px; }
@@ -432,25 +444,25 @@
 <body>
 
 <header class="masthead">
-  <div class="masthead-left">
-    <a href="/">On The Record</a>
-    <a href="/">Statements</a>
-    <a href="/essay/">Essay</a>
-    <a href="/reading/">Further Reading</a>
-    <a href="#method">About</a>
-  </div>
-  <div class="masthead-right">Vol. 01 · 2026</div>
+  <a href="/" class="masthead-logo">Officials on Record</a>
+  <nav>
+    <ul class="masthead-nav">
+      <li><a href="/">Statements</a></li>
+      <li><a href="/essay/" class="active">Essay</a></li>
+      <li><a href="/reading/">Further Reading</a></li>
+      <li><a href="#method">About</a></li>
+    </ul>
+  </nav>
 </header>
 
 <section class="hero">
-  <div class="hero-kicker">An essay · 4,100 words</div>
+  <div class="hero-kicker">Anonymous · Published 2026 · 4,100 words</div>
   <h1 class="headline">Extraordinary Claims,<br><em>Extraordinary Silence</em></h1>
-  <p class="deck">For seventy years, a topic was kept outside of serious consideration by design. Then, quietly, the institutions that closed the question began to open it again.</p>
+  <p class="deck">You already have a position on this topic. You didn't arrive at it yourself. In 1953, a stigma campaign taught the public exactly what to think. Seventy years later, it is still working. But the institutions that built it have started saying something different.</p>
   <div class="confirmation">
     <span class="confirmation-label">Confirmed</span>
-    <span class="confirmation-text">The events that open this essay are documented by the U.S. Department of Defense, sworn congressional testimony, and officially declassified Navy footage.</span>
+    <span class="confirmation-text">The events that open this essay are documented by the U.S. Department of Defense, sworn congressional testimony, and officially declassified Navy footage. None are in dispute.</span>
   </div>
-  <div class="byline">Anonymous · Published 2026</div>
 </section>
 
 <article class="article" id="essay">
